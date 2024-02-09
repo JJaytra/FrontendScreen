@@ -28,7 +28,7 @@ export default function Home() {
           Your one-stop shop for UNSW course and elective reviews.
         </p>
         <div className="flex border-2 border-textbox mt-12 h-12 w-3/4 rounded ">
-          <IconSearch className="color-textbox mr-6 mt-2.5 ml-3 " />
+          <IconSearch className="color-textbox mr-6 mt-2.5 ml-3 text-textbox" />
           <input
             className="w-full placeholder-textbox"
             type="text"
@@ -49,19 +49,32 @@ export default function Home() {
       </div>
       <div className="grid grid-cols-3">
         {coursesData.map((course, index) => (
-          <div key={index} className="bg-card border-2 m-4">
-            <div className="flex">
-              <p className="font-bold">
+          <div
+            key={index}
+            className="bg-card border-2 m-4 shadow-lg rounded-xl p-6"
+          >
+            <div className="flex justify-between">
+              <h1 className="font-bold text-2xl">
                 {course.course_prefix}
                 {course.course_code}
-              </p>
-              <div>
-                <ReviewsDisplay />
-                <p>{course.total_reviews}</p>
+              </h1>
+              <div className="">
+                <ReviewsDisplay rating={course.average_stars} />
+                <p className="text-xs">{course.total_reviews} reviews</p>
               </div>
             </div>
 
-            <p>{course.course_title}</p>
+            <p className="mb-12">{course.course_title}</p>
+            <div className="flex">
+              {course.offered_terms.map((term, termIndex) => (
+                <div
+                  key={termIndex}
+                  className="bg-term px-2 py-1 rounded-full mr-2 mb-2 text-xs"
+                >
+                  {term}
+                </div>
+              ))}
+            </div>
           </div>
         ))}
       </div>

@@ -18,6 +18,8 @@ const config: Config = {
         textbox: "#9cade9",
         sort: "#b7b7b7 ",
         card: "#fafafa",
+        star: "#b789e5 ",
+        term: "#cae8f3",
       },
     },
   },
