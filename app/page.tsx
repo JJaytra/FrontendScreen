@@ -1,8 +1,9 @@
 "use client";
-import { IconSearch } from "@tabler/icons-react";
+
 import { useEffect, useState } from "react";
 import rawCoursesData from "../courses.json";
 import ReviewsDisplay from "./(components)/ReviewsDisplay";
+import { IconSearch } from "@tabler/icons-react";
 
 interface Course {
   course_prefix: string;
@@ -14,20 +15,38 @@ interface Course {
 }
 
 export default function Home() {
+  const [headerColor, setHeaderColor] = useState("text-blue-600");
   const [coursesData, setCoursesData] = useState<Course[]>([]);
+
   useEffect(() => {
-    return setCoursesData(rawCoursesData);
+    setCoursesData(rawCoursesData);
   }, []);
 
+  const changeHeaderColor = () => {
+    const colors = [
+      "text-blue-600",
+      "text-red-600",
+      "text-green-600",
+      "text-yellow-600",
+    ];
+    const randomColor = colors[Math.floor(Math.random() * colors.length)];
+    setHeaderColor(randomColor);
+  };
+
   return (
-    <div className="pl-28 pt-8 w-full">
-      <div>
+    <div className="pt-8 w-full mx-52">
+      <div className="mx-4">
         <p>DevSoc presents</p>
-        <h1 className="text-7xl font-bold my-4 text-blue-600">unilectives</h1>
+        <h1
+          className={`text-7xl font-bold my-4 ${headerColor} cursor-pointer`}
+          onClick={changeHeaderColor}
+        >
+          unilectives
+        </h1>
         <p className="font-bold">
           Your one-stop shop for UNSW course and elective reviews.
         </p>
-        <div className="flex border-2 border-textbox mt-12 h-12 w-3/4 rounded ">
+        <div className="flex border-2 border-textbox mt-12 h-12 rounded ">
           <IconSearch className="color-textbox mr-6 mt-2.5 ml-3 text-textbox" />
           <input
             className="w-full placeholder-textbox"
@@ -47,24 +66,23 @@ export default function Home() {
           </option>
         </select>
       </div>
-      <div className="grid grid-cols-3">
+      <div className="grid grid-cols-3 justify-center">
         {coursesData.map((course, index) => (
-          <div
-            key={index}
-            className="bg-card border-2 m-4 shadow-lg rounded-xl p-6"
-          >
-            <div className="flex justify-between">
+          <div key={index} className="bg-card m-4 shadow-lg rounded-xl p-6">
+            <div className="flex justify-between mb-4">
               <h1 className="font-bold text-2xl">
                 {course.course_prefix}
                 {course.course_code}
               </h1>
               <div className="">
                 <ReviewsDisplay rating={course.average_stars} />
-                <p className="text-xs">{course.total_reviews} reviews</p>
+                <p className="text-xs text-reviews">
+                  {course.total_reviews} reviews
+                </p>
               </div>
             </div>
 
-            <p className="mb-12">{course.course_title}</p>
+            <p className="mb-12 text-sm">{course.course_title}</p>
             <div className="flex">
               {course.offered_terms.map((term, termIndex) => (
                 <div

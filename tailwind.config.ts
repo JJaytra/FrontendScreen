@@ -20,6 +20,7 @@ const config: Config = {
         card: "#fafafa",
         star: "#b789e5 ",
         term: "#cae8f3",
+        reviews: "#abb4c3",
       },
     },
   },
