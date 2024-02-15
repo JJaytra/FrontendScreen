@@ -16,11 +16,13 @@ interface Course {
 
 export default function Home() {
   const [headerColor, setHeaderColor] = useState("text-blue-600");
-  const [coursesData, setCoursesData] = useState<Course[]>([]);
+  const [searchBoxDisplayed, setSearchBoxDisplayed] = useState(false);
 
-  useEffect(() => {
-    setCoursesData(rawCoursesData);
-  }, []);
+  const showSearchBox = () => {
+    setSearchBoxDisplayed(!searchBoxDisplayed);
+  };
+
+  const coursesData = rawCoursesData;
 
   const changeHeaderColor = () => {
     const colors = [
@@ -34,7 +36,26 @@ export default function Home() {
   };
 
   return (
-    <div className="pt-8 w-full mx-52">
+    <div className="pt-8 w-full mx-48">
+      {searchBoxDisplayed && (
+        <div className="fixed top-0 left-0 w-full h-full flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white border-4 border-black p-8 rounded w-1/3 flex">
+            <input
+              className="w-full placeholder-textbox h-16 text-lg px-2"
+              type="text"
+              name="test"
+              placeholder="Search for a course e.g. COMP1511"
+              id="1"
+            />
+            <button
+              onClick={showSearchBox}
+              className="text-2xl text-red-500 h-8 w-8 rounded-lg hover:bg-gray-100"
+            >
+              X
+            </button>
+          </div>
+        </div>
+      )}
       <div className="mx-4">
         <p>DevSoc presents</p>
         <h1
@@ -46,7 +67,10 @@ export default function Home() {
         <p className="font-bold">
           Your one-stop shop for UNSW course and elective reviews.
         </p>
-        <div className="flex border-2 border-textbox mt-12 h-12 rounded ">
+        <div
+          className="flex border-2 border-textbox mt-12 h-12 rounded "
+          onClick={showSearchBox}
+        >
           <IconSearch className="color-textbox mr-6 mt-2.5 ml-3 text-textbox" />
           <input
             className="w-full placeholder-textbox"
@@ -68,7 +92,10 @@ export default function Home() {
       </div>
       <div className="grid grid-cols-3 justify-center">
         {coursesData.map((course, index) => (
-          <div key={index} className="bg-card m-4 shadow-lg rounded-xl p-6">
+          <div
+            key={index}
+            className="bg-card m-4 shadow-lg rounded-xl p-6 hover:bg-darkCard"
+          >
             <div className="flex justify-between mb-4">
               <h1 className="font-bold text-2xl">
                 {course.course_prefix}

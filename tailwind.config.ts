@@ -21,6 +21,7 @@ const config: Config = {
         star: "#b789e5 ",
         term: "#cae8f3",
         reviews: "#abb4c3",
+        darkCard: "#ECE9E9",
       },
     },
   },
