@@ -1,6 +1,8 @@
 Hello~
 
-Here's the repo containing my Backend Technical Screening answers: Apologies for the scuffed setup. 
+These are my answers to the Frontend Tasks. 
+
+Furthermore, here's the repo containing my Backend Technical Screening answers: Apologies for the scuffed setup. 
 
 https://github.com/JJaytra/2024-recruitment-technical-assessment/tree/main/backend
 
@@ -12,7 +14,7 @@ Please run
 
 2. Then npm run dev
 
-3. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Open [http://localhost:3000](http://localhost:3000)
 
 4. Profit, thanks
 
